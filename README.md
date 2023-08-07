@@ -253,6 +253,9 @@ curl localhost:8000/detect-slangs
 Consider implementing proper error handling and authentication mechanisms for production use.
 2. Customize and enhance the script to suit your specific requirements.
 
+## TODO
+Add Screenshots of working api's output
+
 
 
 
