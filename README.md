@@ -1,30 +1,74 @@
 # Approach / Idea after reading Daisy challenge task
 
-## Optimizing Employee Experience and Operational Efficiency: A Comprehensive Approach
+## Optimizing Employee Experience and Operations
 
-In today's dynamic business landscape, ensuring a seamless and productive work environment is paramount. To achieve this, organizations must harness technology and innovation to address diverse challenges that arise within their workforce. This comprehensive approach outlines a series of tasks designed to enhance employee experience, streamline operations, and uphold the values and standards of your company.
+Why - After reading Daisy Challenge, I came up with this concept because I had been personally faced with such manual tasks carried out by individuals in small or mid-size companies that are not geared to automate manual jobs or rely on new ML approaches to ease and streamline the workflow in organizations.
+
+What - In this task I tried to cover examples given in daisy-challenge and prepared APIs for each one of them to reduce manual work and somewhat automate manual stuff done in the company by calling their respective APIs
+
+How
 
 These 4 tasks are the high-level idea I get after reading Daisy's challenge examples
 
 ## Task 1: Detecting Slangs from Employees' Feedback
 
-Effective communication is the cornerstone of a healthy workplace culture. However, amidst the myriad interactions that occur, it's crucial to maintain a professional and respectful tone. Task 1 focuses on leveraging language processing techniques to automatically identify and flag any instances of slangs or inappropriate language in employees' feedback. By implementing this solution, we aim to promote a respectful and inclusive communication environment while preserving the integrity of our corporate discourse.
+Why - Nowadays people use chatgpt to fill in responses and responses given by chatgpt are long and so instead of reading the whole feedback from employees we can get slang from the sentences and detect the moto of employees according to slang
+
+Also later on we can embed ML approaches and tools to better understand the sentiments of employees using various sentiment analysis tools 
+
+What - For this I created an api `slang-detect` which will give slang from sentences(employee_feedback).
+
+How - We have created a separate DB of slang which gets updated with new slang words according to us. Now when we call the `slang-detect` API it searches that word in `slang-db` and gives the list of slang words
+
+Pro's
+1. Removing Manual work of reading feedback
+
+Con's
+1. Maintaining `slang-db` is a huge task. For better optimization, we can use the ML sentiment analysis tools and APIs
 
 ## Task 2: Validating Employees' Responses
 
-Consistency and adherence to established guidelines are vital components of maintaining a cohesive organizational identity. Task 2 delves into the development of an automated validation system that ensures employees' responses align with predefined standards. Through systematic checks and thoughtful feedback, this task aims to cultivate a culture of effective and professional communication, enhancing both internal and external interactions.
+Why - This task is important because many employees fill out forms in a hurry or with laziness. They don't fill the form with the correct information
+
+What - For this I created an API `flagged-employees` that check responses and flag the employees
+
+How - For this demo I took care of two things - 
+
+i. `employee_salary > average_expense` in that case he is entering false values in either one of the two columns.
+ii. Enter less than 10 digits in ph no. 
+
+If any of these things happen API will show the `name_of_employee` and `response` he filled incorrectly and create a separate CSV file of `flagged-employees` for that.
+
+Pros - Detecting employees who filled in wrong responses and eliminating manual checking of `employees_info`.
+
+Cons - Not optimized approach Doing this thing with a linear search approach takes a long time and complexity
 
 ## Task 3: Transferring Employees Database to CSV
 
-NOTE - Also by enabling Google Sheets feature we could have great graphs and dashboards as an inbuilt feature of the database to better analyze the data. But I don't have the access to GCP so that's why transferred the db to csv for this demo
+Why - Databases are hard to analyze and study we need more visuals than boring tables with rows and columns
 
-Data management plays a pivotal role in informed decision-making and strategic planning. Task 3 centers on the seamless transfer of employees' database to a CSV format, enabling effortless data sharing and analysis. By streamlining this process, we facilitate the availability of accurate and structured employee information, empowering teams across the organization to leverage insights and drive data-driven initiatives.
+What - We are transferring data into a CSV file by calling `transfer-db-to-csv` 
 
+How - By calling API we run a loop on DB Tables and create CSV Files for each table in the DB
 
+Pros - CSV files are general-purpose files that we can use and integrate with ML as well to do ML operations on data 
+Also, we can transfer them to google sheets to better visualize the data using graphs and dashboards provided by google sheets
+
+Cons - No as such con IMO. Maybe we can directly transfer data to google sheets but I don't have access to Google Sheets API so I implemented CSV Method
 
 ## Task 4: Sending Onboarding Messages to New Employees
 
-The onboarding process is a pivotal moment for new hires, setting the tone for their journey within the company. Task 4 revolves around automating the delivery of personalized onboarding messages to new employees. By engaging them with timely and relevant information, we aim to foster a positive initial experience, facilitate a smooth integration into the team, and ultimately contribute to employee satisfaction and retention.
+Why - It's a great way to welcome and greet new employees with some message and it should be automated because the company hires a lot of employees 
+
+What - We have created an API `onboard-message` to send a welcome message to new employees
+
+How - We maintain a table named `new-employees` and then `onboard-message` to every new employee from the `new-employee` table
+
+Pros - Removed manual work of writing SMS to new employees.
+
+Cons - API sends SMS to every person in the table so we need to remove persons whom we sent onboard message from the list in order not to send SMS to the same person again
+
+Also, I haven't implemented the mail part as I was not able to enable the mail service in Python
 
 
 ## Prerequisites
@@ -72,7 +116,7 @@ def detect_slangs(sentence):
     return detected_slangs
 ```
 
-2. /detect-slangs Endpoint: This endpoint exposes an API that retrieves employee feedback texts from the employee_feedback table in the database. For each feedback, it uses the detect_slangs function to detect any slangs present in the feedback. If slangs are detected, the feedback's ID, the original feedback text, and the detected slangs are stored in a list. The list is returned as the API response.
+2. /detect-slangs Endpoint: This endpoint exposes an API that retrieves employee feedback texts from the employee_feedback table in the database. For each feedback, it uses the detect_slangs function to detect any slang present in the feedback. If slang is detected, the feedback's ID, the original feedback text, and the detected slang are stored in a list. The list is returned as the API response.
 
 ```python
 @app.get("/detect-slangs")
@@ -155,9 +199,9 @@ return {"flagged_employees_csv": flagged_csv_file}
 
 ## Task 3 -> Database to CSV Transfer Api
 
-This Python script provides a web API endpoint for transferring data from a database to CSV files. The code is implemented using the FastAPI framework and assumes a connection to a database. When the `/transfer-db-to-csv` endpoint is accessed, it retrieves data from three different database tables: `employee_feedback`, `employees_info`, and `new_employees`, and then writes the data to corresponding CSV files.
+This Python script provides a web API endpoint for transferring data from a database to CSV files. The code is implemented using the FastAPI framework and assumes a connection to a database. When the `/transfer-db-to-csv` endpoint is accessed, it retrieves data from three different database tables: `employee_feedback`, `employees_info`, and `new_employees`, and then writes the data to correspond CSV files.
 
-1. Function to search table in db and create csv for them
+1. Function to search table in DB and create CSV for them
 ```python
 def transfer_table_to_csv(cursor, table_name):
     try:
@@ -284,6 +328,7 @@ Consider implementing proper error handling and authentication mechanisms for pr
 
 ## TODO
 Add Screenshots of working api's output
+Add DB schema structure
 
 
 
