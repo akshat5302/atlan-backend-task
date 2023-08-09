@@ -1,3 +1,32 @@
+# Approach / Idea after reading Daisy challenge task
+
+## Optimizing Employee Experience and Operational Efficiency: A Comprehensive Approach
+
+In today's dynamic business landscape, ensuring a seamless and productive work environment is paramount. To achieve this, organizations must harness technology and innovation to address diverse challenges that arise within their workforce. This comprehensive approach outlines a series of tasks designed to enhance employee experience, streamline operations, and uphold the values and standards of your company.
+
+These 4 tasks are the high-level idea I get after reading Daisy's challenge examples
+
+## Task 1: Detecting Slangs from Employees' Feedback
+
+Effective communication is the cornerstone of a healthy workplace culture. However, amidst the myriad interactions that occur, it's crucial to maintain a professional and respectful tone. Task 1 focuses on leveraging language processing techniques to automatically identify and flag any instances of slangs or inappropriate language in employees' feedback. By implementing this solution, we aim to promote a respectful and inclusive communication environment while preserving the integrity of our corporate discourse.
+
+## Task 2: Validating Employees' Responses
+
+Consistency and adherence to established guidelines are vital components of maintaining a cohesive organizational identity. Task 2 delves into the development of an automated validation system that ensures employees' responses align with predefined standards. Through systematic checks and thoughtful feedback, this task aims to cultivate a culture of effective and professional communication, enhancing both internal and external interactions.
+
+## Task 3: Transferring Employees Database to CSV
+
+NOTE - Also by enabling Google Sheets feature we could have great graphs and dashboards as an inbuilt feature of the database to better analyze the data. But I don't have the access to GCP so that's why transferred the db to csv for this demo
+
+Data management plays a pivotal role in informed decision-making and strategic planning. Task 3 centers on the seamless transfer of employees' database to a CSV format, enabling effortless data sharing and analysis. By streamlining this process, we facilitate the availability of accurate and structured employee information, empowering teams across the organization to leverage insights and drive data-driven initiatives.
+
+
+
+## Task 4: Sending Onboarding Messages to New Employees
+
+The onboarding process is a pivotal moment for new hires, setting the tone for their journey within the company. Task 4 revolves around automating the delivery of personalized onboarding messages to new employees. By engaging them with timely and relevant information, we aim to foster a positive initial experience, facilitate a smooth integration into the team, and ultimately contribute to employee satisfaction and retention.
+
+
 ## Prerequisites
 
 Before using this script, make sure you have the following components set up:
