@@ -16,15 +16,13 @@ Why - Nowadays people use chatgpt to fill in responses and responses given by ch
 
 Also later on we can embed ML approaches and tools to better understand the sentiments of employees using various sentiment analysis tools 
 
-What - For this I created an api `slang-detect` which will give slang from sentences(employee_feedback).
+What - For this I created an API `slang-detect` which will give slang from sentences(employee_feedback).
 
 How - We have created a separate DB of slang which gets updated with new slang words according to us. Now when we call the `slang-detect` API it searches that word in `slang-db` and gives the list of slang words
 
-Pro's
-1. Removing Manual work of reading feedback
+Pros - Removing Manual work of reading feedback
 
-Con's
-1. Maintaining `slang-db` is a huge task. For better optimization, we can use the ML sentiment analysis tools and APIs
+Cons - Maintaining `slang-db` is a huge task. For better optimization, we can use the ML sentiment analysis tools and APIs
 
 ## Task 2: Validating Employees' Responses
 
@@ -35,6 +33,7 @@ What - For this I created an API `flagged-employees` that check responses and fl
 How - For this demo I took care of two things - 
 
 i. `employee_salary > average_expense` in that case he is entering false values in either one of the two columns.
+
 ii. Enter less than 10 digits in ph no. 
 
 If any of these things happen API will show the `name_of_employee` and `response` he filled incorrectly and create a separate CSV file of `flagged-employees` for that.
@@ -327,8 +326,8 @@ Consider implementing proper error handling and authentication mechanisms for pr
 2. Customize and enhance the script to suit your specific requirements.
 
 ## TODO
-Add Screenshots of working api's output
-Add DB schema structure
+1. Add Screenshots of working api's output
+2. Add DB schema structure
 
 
 
