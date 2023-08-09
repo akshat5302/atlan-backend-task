@@ -29,7 +29,7 @@ The onboarding process is a pivotal moment for new hires, setting the tone for t
 
 ## Prerequisites
 
-Before using this script, make sure you have the following components set up:
+Before using atlan_task.py script, make sure you have the following components set up:
 
 1. Python environment with required libraries installed.
 2. A running database with the specified tables (`employee_feedback`, `employees_info`, and `new_employees`).
